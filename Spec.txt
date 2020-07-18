@@ -1,14 +1,19 @@
-vu8 - version
+version: vu8
 Assuming version 0
-Flag byte
+Flag byte [ skip, dense, ]
 
 if schema flag set
-  vu32 schema version
-
-  KL: vu8 // key lengths
+  schema_version: vu32
+  if dense flag not set
+    KL: vu8 // key lengths
+  end if
   LL: vu8 // value length lengths
   if skip flag set
-    start: uKL // Start at key x, all others nulled
+    if dense flag set
+      start: vu32
+    else
+      start: uKL // Start at key x, all others nulled
+    end if
   end if
   items: uKL
-  payloadsize: vu8
+  payloadsize: vu32
