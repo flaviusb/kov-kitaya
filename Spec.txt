@@ -1,0 +1,14 @@
+vu8 - version
+Assuming version 0
+Flag byte
+
+if schema flag set
+  vu32 schema version
+
+  KL: vu8 // key lengths
+  LL: vu8 // value length lengths
+  if skip flag set
+    start: uKL // Start at key x, all others nulled
+  end if
+  items: uKL
+  payloadsize: vu8
